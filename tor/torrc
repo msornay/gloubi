@@ -1,0 +1,3 @@
+# Middle Relay
+ORPort 9001
+ExitPolicy reject *:*
