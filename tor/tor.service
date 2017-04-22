@@ -1,0 +1,14 @@
+[Unit]
+Description=Gloubi Tor Service
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStartPre=-/usr/bin/docker kill tor
+ExecStartPre=-/usr/bin/docker rm tor
+ExecStartPre=-/usr/bin/docker pull gloubi/tor:latest
+ExecStart=/usr/bin/docker run  -d --name tor --restart always gloubi/tor:latest
+ExecStop=/usr/bin/docker stop tor
+
+[Install]
+WantedBy=multi-user.target
