@@ -1,0 +1,22 @@
+- hosts: tor
+  tasks:
+    - name: update repos and install python-setuptools
+      apt:
+        name: python-setuptools
+        update_cache: yes
+      become: true
+
+    - name: install pip
+      easy_install:
+        name: pip
+        state: latest
+      become: true
+
+    - name: install docker-py
+      pip: name=docker-py executable=/usr/local/bin/pip
+      become: true
+
+    - name: create a gloubi tor relay
+      docker_container:
+        name: tor
+        image: gloubi/tor
